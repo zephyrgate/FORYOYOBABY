@@ -7,8 +7,11 @@
     <title>Commande</title>
 </head>
 <body>
-    <table class="table table-bordered table-striped">
-        <thead>
+
+    <div class="container">
+        <div class="text-center h2">Commandes</div>
+        <table class="table table-bordered table-striped">
+            <thead>
             <tr>
                 <th>Id</th>
                 <th>Id Produit</th>
@@ -16,27 +19,29 @@
                 <th>quantité</th>
                 <th>Etat du paiement</th>
             </tr>
-        </thead>
-        <tbody>
-            <th:block th:each="commande : ${listCommandes}">
+            </thead>
+            <tbody>
+            <th:block th:each="commande : ${commandes}">
                 <tr>
                     <td>[[ ${commande.id} ]]</td>
-                    <td>[[ ${commande.product_id} ]]</td>
-                    <td>[[ ${commande.date_commande} ]]</td>
+                    <td>[[ ${commande.produit.id} ]]</td>
+                    <td>[[ ${commande.dateCommande} ]]</td>
                     <td>[[ ${commande.quantite} ]]</td>
-                    <td>[[ ${commande.commande_payee} ]]</td>
+                    <td>[[ ${commande.commandePayee} ]]</td>
                 </tr>
             </th:block>
-        </tbody>
-    </table>
-    <div>
-        <nav aria-label="Page navigation ">
-            <ul class="pagination">
-                <li th:each="page, status:${pages}" th:class="${status.index == pageCourante} ? 'active page-item' : 'page-item'">
-                    <a class="page-link" th:href="@{/commandes(page=${status.index}, keyword=${keyword})}">[[ ${status.index+1} ]] </a>
-                </li>
-            </ul>
-        </nav>
+            </tbody>
+        </table>
+        <div>
+            <nav aria-label="Page navigation ">
+                <ul class="pagination">
+                    <li th:each="page, status:${pages}" th:class="${status.index == pageCourante} ? 'active page-item' : 'page-item'">
+                        <a class="page-link" th:href="@{/commandes(page=${status.index}, keyword=${keyword})}">[[ ${status.index+1} ]] </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
+
 </body>
 </html>
