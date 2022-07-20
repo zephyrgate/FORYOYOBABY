@@ -1,7 +1,5 @@
 <!doctype html>
-<html lang="fr" xmlns:th="http://www.thymeleaf.org"
-xmlns:layout="http://wwW.ultraq.net.nz/thymeleaf/layout"
->
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -10,7 +8,7 @@ xmlns:layout="http://wwW.ultraq.net.nz/thymeleaf/layout"
     <title>Liste des produits</title>
 </head>
 <body>
-<div class="container border bg-white my-5 p3 " layout:fragment="contents">
+<div class="container border bg-white my-5 p3 ">
     <div class="my-5 bg-primary">
      <h1>Liste des produits</h1>
     </div>
@@ -26,7 +24,7 @@ xmlns:layout="http://wwW.ultraq.net.nz/thymeleaf/layout"
         </tr>
         </thead>
         <tbody>
-        <tr th:each="p:${listprd}" >
+        <tr th:each="p:${listPrd}" >
             <td th:text="${p.id}" scope="row"></td>
             <td th:text="${p.titre}"></td>
             <td th:text="${p.description}"></td>
