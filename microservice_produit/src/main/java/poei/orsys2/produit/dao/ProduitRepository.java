@@ -1,4 +1,6 @@
-package microservice_produit.src.main.java.poei.orsys2.produit.dao;
+package poei.orsys2.produit.dao;
 
-public interface ProduitRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ProduitRepository extends JpaRepository<Produit,Long> {
 }
