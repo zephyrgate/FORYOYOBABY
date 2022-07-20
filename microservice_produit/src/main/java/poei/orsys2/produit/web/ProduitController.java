@@ -36,7 +36,7 @@ public class ProduitController {
     public String  newProduit(Model model,Produit prd) {
 
             produitRepository.save(prd);
-            System.err.println("the enterprise has been added");
+            System.err.println("the product has been added");
             return "redirect:/produits";
         }
 
@@ -49,6 +49,12 @@ public class ProduitController {
     public String  deleteProduit(@RequestParam int id) {
         produitRepository.deleteById(id);
         return "redirect:/produits";
+    }
+    @RequestMapping(value="/produits/search",method = RequestMethod.GET)
+    public String searchProducts(@RequestParam String searchTerm){
+        //produitRepository
+
+         return "redirect:/produits";
     }
 
 }
