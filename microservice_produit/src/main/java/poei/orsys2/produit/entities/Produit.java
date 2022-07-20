@@ -1,4 +1,4 @@
-package microservice_produit.src.main.java.poei.orsys2.entities;
+package poei.orsys2.produit.entities;
 
 
 
