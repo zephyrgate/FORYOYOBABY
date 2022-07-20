@@ -36,7 +36,31 @@ xmlns:layout="http://wwW.ultraq.net.nz/thymeleaf/layout"
         </tr>
         </tbody>
     </table>
-    <a th:href="@{/produit/add}" class="btn btn-success my-5">Ajouter un entreprise</a>
+    <div>
+        <form method="post" th:action="@{/produits/create}">
+            <div class="mb-3">
+                <label for="titre" class="form-label">titre</label>
+                <input type="text" class="form-control" id="titre" name="titre" placeholder="titre" th:value="${produit.titre}">
+                <!-- 	  <span class="text-danger" th:errors="$(produit.titre)"></span> -->
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">raison social</label>
+                <input type="text" class="form-control" id="description" name="description" placeholder="description" th:value="${produit.description}">
+                <!-- 	  <span th:errors="*(description)"></span> -->
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">image</label>
+                <input type="text" class="form-control" id="image" name="image" placeholder="image" th:value="${produit.image}">
+                <!-- 	  <span th:errors="*(description)"></span> -->
+            </div>
+            <div class="mb-3">
+                <label for="prix" class="form-label">prix</label>
+                <input type="text" class="form-control" id="prix" name="prix" placeholder="prix" th:value="${produit.prix}">
+                <!-- 	  <span th:errors="*(description)"></span> -->
+            </div>
+            <input type="submit" class="btn btn-success" value="Ajouter"/>
+        </form>
+    </div>
 </div>
 </body>
 </html>
