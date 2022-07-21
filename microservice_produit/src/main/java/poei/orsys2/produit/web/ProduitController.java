@@ -1,6 +1,7 @@
 package poei.orsys2.produit.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -51,10 +52,15 @@ public class ProduitController {
         return "redirect:/produits";
     }
     @RequestMapping(value="/produits/search",method = RequestMethod.GET)
-    public String searchProducts(@RequestParam String searchTerm){
+    public String searchProducts(@RequestParam String keyword, Model model){
         //produitRepository
-
-         return "redirect:/produits";
+        System.err.println(keyword);
+        List<Produit> produits = produitRepository.searchProduit(keyword);
+        System.out.println(produits);
+        model.addAttribute("listPrd", produits);
+        model.addAttribute("produit", new Produit());
+        model.addAttribute("keyword", keyword);
+        return "produits";
     }
 
 }

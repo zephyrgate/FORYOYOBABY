@@ -74,4 +74,14 @@ public class Produit {
         this.titre = titre;
     }
 
+    @Override
+    public String toString() {
+        return "Produit{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", image='" + image + '\'' +
+                ", prix=" + prix +
+                ", titre='" + titre + '\'' +
+                '}';
+    }
 }
