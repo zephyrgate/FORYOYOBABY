@@ -19,7 +19,9 @@ public class ProduitController {
 
     ///get all produit
     @RequestMapping(value={"/produit","/"},method = RequestMethod.GET)
-    public String  index(Model model, int page , int size) {
+    public String  index(Model model,
+                         @RequestParam(name="page", defaultValue = "0") int page ,
+                         @RequestParam(name="size", defaultValue = "4")int size) {
         Page<Produit> listProduits = produitRepository.findAll(PageRequest.of(page,size));
         int[] pages = new int[listProduits.getTotalPages()];
 
