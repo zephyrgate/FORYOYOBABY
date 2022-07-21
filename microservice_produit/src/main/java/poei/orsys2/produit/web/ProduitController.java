@@ -1,6 +1,8 @@
 package poei.orsys2.produit.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,15 +17,18 @@ public class ProduitController {
     @Autowired
     ProduitRepository produitRepository;
 
-    ///get all produits
-    @RequestMapping(value={"/produits","/"},method = RequestMethod.GET)
-    public String  getProduit(Model model) {
-        List<Produit> listProduits=produitRepository.findAll();
-        model.addAttribute("listPrd",listProduits);
-        model.addAttribute("produit", new Produit());
+    ///get all produit
+    @RequestMapping(value={"/produit","/"},method = RequestMethod.GET)
+    public String  index(Model model, int page , int size) {
+        Page<Produit> listProduits = produitRepository.findAll(PageRequest.of(page,size));
+        int[] pages = new int[listProduits.getTotalPages()];
+
+        model.addAttribute("listPrd",listProduits.getContent());
+        model.addAttribute("prd", new Produit());
+        model.addAttribute("pages",pages);
         return "produits";
     }
-    @RequestMapping(value="/produits/edit",method =RequestMethod.GET)
+    @RequestMapping(value="/produit/edit",method =RequestMethod.GET)
     public String editProduit(Model model,@RequestParam int id) {
         // Produit prd = produitRepository.findById(id);
 //        System.out.print(prd);
@@ -32,29 +37,29 @@ public class ProduitController {
     }
 
     //add a new enterprise
-    @RequestMapping(value="/produits/create",method =RequestMethod.POST)
+    @RequestMapping(value="/produit/create",method =RequestMethod.POST)
     public String  newProduit(Model model,Produit prd) {
 
             produitRepository.save(prd);
             System.err.println("the product has been added");
-            return "redirect:/produits";
+            return "redirect:/produit";
         }
 
-    @RequestMapping(value="/produits/update",method =RequestMethod.POST)
+    @RequestMapping(value="/produit/update",method =RequestMethod.POST)
     public String  updateProduit(@ModelAttribute(value="prd") Produit prd) {
         produitRepository.save(prd);
-        return "redirect:/produits";
+        return "redirect:/produit";
     }
-    @RequestMapping(value="/produits/delete",method =RequestMethod.GET)
+    @RequestMapping(value="/produit/delete",method =RequestMethod.GET)
     public String  deleteProduit(@RequestParam int id) {
         produitRepository.deleteById(id);
-        return "redirect:/produits";
+        return "redirect:/produit";
     }
-    @RequestMapping(value="/produits/search",method = RequestMethod.GET)
+    @RequestMapping(value="/produit/search",method = RequestMethod.GET)
     public String searchProducts(@RequestParam String searchTerm){
         //produitRepository
 
-         return "redirect:/produits";
+         return "redirect:/produit";
     }
 
 }
