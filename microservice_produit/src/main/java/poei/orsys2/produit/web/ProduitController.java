@@ -62,7 +62,7 @@ public class ProduitController {
         List<Produit> produits = produitRepository.searchProduit(keyword);
         System.out.println(produits);
         model.addAttribute("listPrd", produits);
-        model.addAttribute("produit", new Produit());
+        model.addAttribute("prd", new Produit());
         model.addAttribute("keyword", keyword);
         return "produits";
     }

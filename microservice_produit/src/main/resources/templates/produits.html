@@ -15,7 +15,7 @@
 <div class="my-5 bg-primary"><h1>Liste des produits</h1></div>
 <div class="container my-5 p-3 ">
     <div>
-        <form th:action="@{/produits/search}" method="get">
+        <form th:action="@{/produit/search}" method="get">
             <label for="keyword"> Mot-clés: </label>
             <input type="text"   id="keyword" name="keyword" placeholder="chercher un produit..." th:value="${keyword}"/>
             <button type="submit" class="btn btn-primary" >Rechercher</button>
@@ -39,7 +39,7 @@
             <td th:text="${p.description}"></td>
             <td th:text="${p.image}"></td>
             <td th:text="${p.prix}"></td>
-            <td><a class ="btn btn-danger" th:href="@{/produits/delete(id=${p.id})}">Supprimer</a></td>
+            <td><a class ="btn btn-danger" th:href="@{/produit/delete(id=${p.id})}">Supprimer</a></td>
         </tr>
         </tbody>
     </table>
@@ -51,20 +51,20 @@
         </ul>
     </div>
     <div class="bg-light my-5 p-3">
-        <form method="post" th:action="@{/produits/create}">
+        <form method="post" th:action="@{/produit/create}">
             <div class="mb-3">
                 <label for="titre" class="form-label">titre</label>
-                <input type="text" class="form-control" id="titre" name="titre" placeholder="titre" th:value="${produit.titre}">
+                <input type="text" class="form-control" id="titre" name="titre" placeholder="titre" th:value="${prd.titre}">
                 <!-- 	  <span class="text-danger" th:errors="$(produit.titre)"></span> -->
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label">description</label>
-                <input type="text" class="form-control" id="description" name="description" placeholder="description" th:value="${produit.description}">
+                <input type="text" class="form-control" id="description" name="description" placeholder="description" th:value="${prd.description}">
                 <!-- 	  <span th:errors="*(description)"></span> -->
             </div>
             <div class="mb-3">
                 <label for="image" class="form-label">image</label>
-                <input type="text" class="form-control" id="image" name="image" placeholder="image" th:value="${produit.image}">
+                <input type="text" class="form-control" id="image" name="image" placeholder="image" th:value="${prd.image}">
                 <!-- 	  <span th:errors="*(description)"></span> -->
             </div>
             <div class="mb-3">
