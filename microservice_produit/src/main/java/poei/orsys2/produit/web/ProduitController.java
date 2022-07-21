@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import poei.orsys2.produit.dao.ProduitRepository;
 import poei.orsys2.produit.entities.Produit;
@@ -18,7 +19,9 @@ public class ProduitController {
 
     ///get all produit
     @RequestMapping(value={"/produit","/"},method = RequestMethod.GET)
-    public String  index(Model model, int page , int size) {
+    public String  index(Model model,
+                         @RequestParam(name="page",defaultValue = "0") int page ,
+                         @RequestParam(name="size",defaultValue = "4") int size) {
         Page<Produit> listProduits = produitRepository.findAll(PageRequest.of(page,size));
         int[] pages = new int[listProduits.getTotalPages()];
 
@@ -55,12 +58,17 @@ public class ProduitController {
         return "redirect:/produit";
     }
     @RequestMapping(value="/produit/search",method = RequestMethod.GET)
-    public String searchProducts(@RequestParam String keyword, Model model){
-        //produitRepository
-        System.err.println(keyword);
+    public String searchProducts(@RequestParam String keyword, Model model,
+                                 @RequestParam(name="page",defaultValue = "0") int page ,
+                                 @RequestParam(name="size",defaultValue = "4") int size){
         List<Produit> produits = produitRepository.searchProduit(keyword);
-        System.out.println(produits);
-        model.addAttribute("listPrd", produits);
+        System.err.println(produits);
+        Pageable p=PageRequest.of(page,size);
+        Page<Produit> searchPage = new PageImpl<>(produits,p,produits.size());
+
+        int[] pages = new int[searchPage.getTotalPages()];
+        model.addAttribute("pages",pages);
+        model.addAttribute("listPrd", searchPage.getContent());
         model.addAttribute("prd", new Produit());
         model.addAttribute("keyword", keyword);
         return "produits";
