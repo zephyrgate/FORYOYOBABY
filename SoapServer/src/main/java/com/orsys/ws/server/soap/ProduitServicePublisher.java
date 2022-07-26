@@ -10,7 +10,5 @@ public class ProduitServicePublisher {
         Endpoint endpoint = Endpoint.create(new ProduitServiceImpl());
         endpoint.publish("http://localhost:8888/ws/produits");
 
-
-
     }
 }
